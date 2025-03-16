@@ -1,14 +1,14 @@
 // src/AppRoutes.jsx
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import ScreeningPage from './pages/ScreeningPage';
-import DrFemaPage from './pages/DrFemaPage';
-import DoctorsPage from './pages/DoctorsPage';
-import HealthProfilePage from './pages/HealthProfilePage';
-import DashboardPage from './pages/DashboardPage';
-import EmptyPage from "./pages/EmptyPage";
-import AppointmentPage from './pages/AppointmentPage';
+import HomePage from './Pages/HomePage';
+import ScreeningPage from './Pages/ScreeningPage';
+import DrFemaPage from './Pages/DrFemaPage';
+import DoctorsPage from './Pages/DoctorsPage';
+import HealthProfilePage from './Pages/HealthProfilePage';
+import DashboardPage from './Pages/DashboardPage';
+import EmptyPage from "./Pages/EmptyPage";
+import AppointmentPage from './Pages/AppointmentPage';
 
 function AppRoutes() {
   return (
