@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import ScreeningPage from './pages/ScreeningPage';
-import DrFemaPage from './pages/DrFemaPage';
-import DoctorsPage from './pages/DoctorsPage';
-import HealthProfilePage from './pages/HealthProfilePage';
-import DashboardPage from './pages/DashboardPage';
-import AppointmentPage from './pages/AppointmentPage';
-import LoginPage from './pages/LoginPage';
-import RegistrationPage from './pages/RegistrationPage';
-import EntryPoint from './pages/EntryPoint';
+import HomePage from './Pages/HomePage';
+import ScreeningPage from './Pages/ScreeningPage';
+import DrFemaPage from './Pages/DrFemaPage';
+import DoctorsPage from './Pages/DoctorsPage';
+import HealthProfilePage from './Pages/HealthProfilePage';
+import DashboardPage from './Pages/DashboardPage';
+import AppointmentPage from './Pages/AppointmentPage';
+import LoginPage from './Pages/LoginPage';
+import RegistrationPage from './Pages/RegistrationPage';
+import EntryPoint from './ages/EntryPoint';
 
 function AppRoutes({ setIsNavBarVisible }) {
     useEffect(() => {
