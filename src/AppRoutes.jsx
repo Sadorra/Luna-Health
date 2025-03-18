@@ -9,7 +9,7 @@ import DashboardPage from './Pages/DashboardPage';
 import AppointmentPage from './Pages/AppointmentPage';
 import LoginPage from './Pages/LoginPage';
 import RegistrationPage from './Pages/RegistrationPage';
-import EntryPoint from './ages/EntryPoint';
+import EntryPoint from './Pages/EntryPoint';
 
 function AppRoutes({ setIsNavBarVisible }) {
     useEffect(() => {
