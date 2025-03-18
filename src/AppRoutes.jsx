@@ -1,30 +1,34 @@
 import React, { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import HomePage from './Pages/HomePage';
-import ScreeningPage from './Pages/ScreeningPage';
-import DrFemaPage from './Pages/DrFemaPage';
-import DoctorsPage from './Pages/DoctorsPage';
-import HealthProfilePage from './Pages/HealthProfilePage';
-import DashboardPage from './Pages/DashboardPage';
-import AppointmentPage from './Pages/AppointmentPage';
-import LoginPage from './Pages/LoginPage';
-import RegistrationPage from './Pages/RegistrationPage';
-import EntryPoint from './Pages/EntryPoint';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import ScreeningPage from './pages/ScreeningPage';
+import DrFemaPage from './pages/DrFemaPage';
+import DoctorsPage from './pages/DoctorsPage';
+import HealthProfilePage from './pages/HealthProfilePage';
+import DashboardPage from './pages/DashboardPage';
+import AppointmentPage from './pages/AppointmentPage';
+import LoginPage from './pages/LoginPage';
+import RegistrationPage from './pages/RegistrationPage';
+import EntryPoint from './pages/EntryPoint';
 
 function AppRoutes({ setIsNavBarVisible }) {
+    const location = useLocation(); // Get the current path
+
     useEffect(() => {
-        // Handle Navbar Visibility on Route Change
-        const currentPath = window.location.pathname;
+        // Define the paths where the navbar should be hidden
         const hideNavBarPaths = ['/', '/login', '/register'];
-        if (hideNavBarPaths.includes(currentPath)) {
+
+        // Dynamically toggle navbar visibility based on the current route
+        if (hideNavBarPaths.includes(location.pathname)) {
             setIsNavBarVisible(false);
         } else {
             setIsNavBarVisible(true);
         }
-    }, [setIsNavBarVisible]);
+    }, [location, setIsNavBarVisible]);
 
     return (
         <Routes>
+            {/* Define routes */}
             <Route path="/" element={<EntryPoint />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegistrationPage />} />
@@ -35,6 +39,9 @@ function AppRoutes({ setIsNavBarVisible }) {
             <Route path="/health-profile" element={<HealthProfilePage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/appointment" element={<AppointmentPage />} />
+
+            {/* Default redirect to HomePage after login */}
+            <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
     );
 }
