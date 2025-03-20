@@ -14,6 +14,9 @@ const doctorRoutes = require("./src/routers/doctorRoutes");
 const app = express();
 
 // Middleware
+const cors = require("cors");
+
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
 
 // Connect to MongoDB
