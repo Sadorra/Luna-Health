@@ -24,12 +24,19 @@ exports.saveSymptomCheck = async (req, res) => {
             return { answer: qn.answer, question_statement: question.question };
         });
 
+
+
         // Generate summary
         const processedResponses = `For category: ${category}\n` + 
             formattedResponses
                 .map((item) => `The answer is ${item.answer} for the question: ${item.question_statement}`)
                 .join("\n");
 
+
+            // Send data to AI for analysis
+      // const aiSummary = await analyzeSymptomsWithAI(processedResponses);
+      
+      // Store AI-generated summary in a separate collection       
         // Check if a record already exists
         let existingCheck = await SymptomAnalysis.findOne({ userId });
 
