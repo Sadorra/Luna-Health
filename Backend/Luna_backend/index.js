@@ -321,57 +321,58 @@ const appointmentSchema = new mongoose.Schema({
 
 const Appointment = mongoose.model("Appointment", appointmentSchema);
 
+
 const doctorsSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    specialization: {
-        type: String,
-        required: true
-    },
-    discription:{
-      type: String,
-      required: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
-   location: {
-      type: String,
-      required: true
-    },
-    ratings: {
-      type: Number,
-    }
-})
- 
-// create a doctor
+  name: { type: String, required: true },
+  specialization: { type: String, required: true },
+  description: { type: String, required: true }, // Correct field name
+  email: { type: String, required: true, unique: true },
+  location: { type: String, required: true },
+  ratings: { type: Number, default: 0 }, // Average rating
+  reviews: [{
+      userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+      rating: { type: Number, required: true, min: 1, max: 5 },
+      comment: { type: String }
+  }]
+});
 
-const doctor = mongoose.model("doctor", doctorsSchema);
+// Create Doctor model
+const Doctor = mongoose.model("Doctor", doctorsSchema);
 
-const addNewDoctor = async (name, email, specialization, discription, location,ratings) => {
+// Function to add a new doctor
+const addNewDoctor = async (name, email, specialization, description, location, ratings) => { 
   try {
-    const newUser = new doctor({ name, email,specialization, discription, location,ratings });
-    await newUser.save();
-    console.log("User added:", newUser);
+    const newDoctor = new Doctor({ name, email, specialization, description, location, ratings, reviews: [] });
+    await newDoctor.save();
+    console.log("Doctor added:", newDoctor);
   } catch (error) {
-    console.error("Error adding user:", error);
+    console.error("Error adding doctor:", error);
   }
 }
 
-// get doctors api
-app.get("/doctors", async (req, res) => {
+
+app.get('/doctor', async (req, res) => {
   try {
-    const doctors = await doctor.find();
-    res.status(200).json(doctors);
+      const doctor = await Doctor.find()
+      res.status(200).json(doctor);
   } catch (error) {
-    console.error("Error getting doctors:", error);
-    res.status(500).json({ error: "Internal server error" });
+      res.status(500).json({ message: "Internal Server Error" });
   }
-})
+});
+
+
+// get doctors api
+app.get('/doctor/:id', async (req, res) => {
+  try {
+      const doctor = await Doctor.findById(req.params.id).populate('reviews.userId', 'name email');
+      if (!doctor) return res.status(404).json({ message: "Doctor not found" });
+
+      res.status(200).json(doctor);
+  } catch (error) {
+      res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 
 // send user send email to doctor 
 
@@ -449,5 +450,48 @@ app.get("/api/respond-appointment", async (req, res) => {
   } catch (error) {
     console.error("Response Error:", error.message);
     res.status(500).json({ message: "Failed to process response" });
+  }
+});
+
+app.post('/api/rate_doctor', async (req, res) => {
+  try {
+      const { userId, doctorId, rating, comment } = req.body;
+
+      if (!userId || !doctorId || !rating) {
+          return res.status(400).json({ message: "User ID, Doctor ID, and Rating are required" });
+      }
+
+      if (rating < 1 || rating > 5) {
+          return res.status(400).json({ message: "Rating must be between 1 and 5" });
+      }
+
+      const doctor = await Doctor.findById(doctorId);
+      if (!doctor) {
+          return res.status(404).json({ message: "Doctor not found" });
+      }
+
+      // Check if user already rated
+      const existingReview = doctor.reviews.find(review => review.userId.toString() === userId);
+
+      if (existingReview) {
+          // Update existing rating
+          existingReview.rating = rating;
+          existingReview.comment = comment || existingReview.comment;
+      } else {
+          // Add new rating
+          doctor.reviews.push({ userId, rating, comment });
+      }
+
+      // Recalculate the average rating
+      const totalRatings = doctor.reviews.length;
+      const sumRatings = doctor.reviews.reduce((acc, review) => acc + review.rating, 0);
+      doctor.ratings = sumRatings / totalRatings;
+
+      // Save doctor with updated ratings
+      await doctor.save();
+      res.status(200).json({ message: "Doctor rated successfully", doctor });
+  } catch (error) {
+      console.error("Error rating doctor:", error);
+      res.status(500).json({ message: "Internal Server Error" });
   }
 });
