@@ -78,7 +78,7 @@ const CervicalCancerScreening = () => {
       const match = reply.match(/(\d{1,3})\s?%/);
       const percentage = match ? parseInt(match[1]) : 25;
 
-      navigate('/Risk-analysis', {
+      navigate('/RiskAnalysis', {
         state: { riskPercentage: percentage, analysisText: reply , screeningType : "cervical"},
       });
     } catch (err) {
