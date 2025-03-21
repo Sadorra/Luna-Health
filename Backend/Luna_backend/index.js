@@ -10,6 +10,7 @@ const ratingRoutes = require("./src/routers/ratingRouter");
 const symptomRoutes = require("./src/routers/symptomRoutes");
 const symptomCheckRoutes = require("./src/routers/symptomCheckRoutes");
 const doctorRoutes = require("./src/routers/doctorRoutes");
+const authRoutes = require("./src/routers/authRoutes");
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use("/api", ratingRoutes);
 app.use("/api", symptomRoutes);
 app.use("/api", symptomCheckRoutes);
 app.use("/api", doctorRoutes);
+app.use("/api", authRoutes);
 // Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
