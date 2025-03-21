@@ -18,7 +18,7 @@ function DoctorsPage() {
     {
       id: 1,
       name: "Dr. John Lee",
-      specialization: "Endocrinologist",
+      specialization: "Breast Oncologist",
       experience: 12,
       availability: "Mon-Fri",
       image: doc1,
@@ -27,7 +27,7 @@ function DoctorsPage() {
     {
       id: 2,
       name: "Dr. Emily Carter",
-      specialization: "Cardiologist",
+      specialization: "Endocrinologist",
       experience: 8,
       availability: "Tue-Sat",
       image: doc7,
@@ -36,7 +36,7 @@ function DoctorsPage() {
     {
       id: 3,
       name: "Dr. David Kim",
-      specialization: "Pediatrician",
+      specialization: " Gynecologic Oncologist",
       experience: 5,
       availability: "Mon-Wed",
       image: doc6,
@@ -45,7 +45,7 @@ function DoctorsPage() {
     {
       id: 4,
       name: "Dr. Sarah Johnson",
-      specialization: "Dermatologist",
+      specialization: "Gynecologist",
       experience: 10,
       availability: "Wed-Sun",
       image: doc5,
@@ -54,7 +54,7 @@ function DoctorsPage() {
     {
       id: 5,
       name: "Dr. Michael Brown",
-      specialization: "Neurologist",
+      specialization: "Gynecologic Oncologist",
       experience: 15,
       availability: "Thu-Mon",
       image: doc8,
@@ -63,7 +63,7 @@ function DoctorsPage() {
     {
       id: 6,
       name: "Dr. Jennifer Davis",
-      specialization: "Ophthalmologist",
+      specialization: "Endocrinologist",
       experience: 7,
       availability: "Fri-Tue",
       image: doc7,

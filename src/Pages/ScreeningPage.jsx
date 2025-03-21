@@ -1,67 +1,46 @@
-// src/pages/ScreeningPage.jsx
-import React, { useState } from 'react';
-import Checkbox from '../components/Checkbox';
-import Button from '../components/Button';
+import React from "react";
+import { Link } from "react-router-dom";
 
-function ScreeningPage() {
-  const [symptoms, setSymptoms] = useState({
-    chestPain: false,
-    radiatingPain: false,
-    irregularHeartbeat: false,
-    coldSweats: false,
-    nausea: false,
-  });
-
-  const handleCheckboxChange = (event) => {
-    setSymptoms({
-      ...symptoms,
-      [event.target.name]: event.target.checked,
-    });
-  };
-
-  const handleSubmit = () => {
-    // Handle form submission (e.g., send data to API)
-    console.log("Selected symptoms:", symptoms);
-  };
-
+const DiseaseScreening = () => {
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4">Select what you are experiencing from the below list:</h2>
-      <Checkbox
-        label="Chest pain or pressure"
-        name="chestPain"
-        checked={symptoms.chestPain}
-        onChange={handleCheckboxChange}
-      />
-      <Checkbox
-        label="Pain radiating to arms, jaw, neck, or back"
-        name="radiatingPain"
-        checked={symptoms.radiatingPain}
-        onChange={handleCheckboxChange}
-      />
-      <Checkbox
-        label="Irregular heartbeat"
-        name="irregularHeartbeat"
-        checked={symptoms.irregularHeartbeat}
-        onChange={handleCheckboxChange}
-      />
-      <Checkbox
-        label="Cold sweats"
-        name="coldSweats"
-        checked={symptoms.coldSweats}
-        onChange={handleCheckboxChange}
-      />
-      <Checkbox
-        label="Nausea or vomiting"
-        name="nausea"
-        checked={symptoms.nausea}
-        onChange={handleCheckboxChange}
-      />
-      <Button primary onClick={handleSubmit}>
-        Continue
-      </Button>
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r  bg-pink-100 ">
+      <div className="bg-white p-8 rounded-xl shadow-xl max-w-xs w-full">
+        <h1 className="text-2xl text-center text-pink-600 mb-8">Select a Disease for Screening</h1>
+        <div className="flex flex-col gap-4">
+          <Link
+            to="/PcosScreening"
+            className="py-3 px-6 bg-pink-600 text-white rounded-lg text-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition"
+          >
+            PCOS
+          </Link>
+          <Link
+            to="/CervicalCancer"
+            className="py-3 px-6 bg-pink-600 text-white rounded-lg text-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition"
+          >
+            Cervical Cancer
+          </Link>
+          <Link
+            to="/BreastCancer"
+            className="py-3 px-6 bg-pink-600 text-white rounded-lg text-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition"
+          >
+            Breast Cancer
+          </Link>
+          <Link
+            to="/Endometriosis"
+            className="py-3 px-6 bg-pink-600 text-white rounded-lg text-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition"
+          >
+            Endometriosis
+          </Link>
+          <Link
+            to="/OvarianScreening"
+            className="py-3 px-6 bg-pink-600 text-white rounded-lg text-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition"
+          >
+            Ovarian Cancer
+          </Link>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-export default ScreeningPage;
+export default DiseaseScreening;
